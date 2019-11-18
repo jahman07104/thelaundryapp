@@ -1,0 +1,6 @@
+
+  <%= @item.name %> was deleted!
+    <form method="post" action="/items/<%= @item.id %>">
+  <input id="hidden" type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="delete">
+</form>
