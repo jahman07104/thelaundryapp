@@ -1,6 +1,11 @@
-
+<!DOCTYPE html>
+<html>
+  <body>
   <%= @item.name %> was deleted!
-    <form method="post" action="/items/<%= @item.id %>">
+    <form method="POST" action="/items/<%= @item.id %>">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="delete">
+  <a href='/items/new'>Add Items</a>
 </form>
+</body>
+</html>

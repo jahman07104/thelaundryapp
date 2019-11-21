@@ -1,18 +1,25 @@
 
 <h1>Fill Your Basket</h1>
+
 <img style="-webkit-user-select: none;margin: auto;" src="https://i5.walmartimages.com/asr/7bfc6c6b-d379-47b9-bf06-6c71da66a352_1.366a021aa70432f145d54a1d8c40e6b8.jpeg?odnWidth=450&amp;odnHeight=450&amp;odnBg=ffffff">
 
 <% if @user %>
-<%= @user.name %> after you are done you can 
+<%= @user.name %> 
 <% end %>
 
-<a href="/sessions/logout">Log Out</a>
-<form action="/users" method="POST">
 <br>
-  <br>
+ 
   <p>Select an existing item or add a new one.</p>
-    <% @items.each do |item| %>
-    <a href=#items/delete><input type="checkbox" name="user[item_ids][]" id="<%= item.id %>" value="<%= item.id %>"><%= item.name %><br></a>
-    <% end %>
-    <a href=items/new> <h3>click New Item to add to the list</h3> </a>
-</form>
+  <% @items.each do |item| %>
+    <li>
+      <a href=items/delete><input type="checkbox" name="user[item_ids][]" id="<%= item.id %>" value="<%= item.id %>"><%= item.name %></a>
+      <form method="Post" action="/items/<%= item.id %>/delete">
+        <input id="hidden" type="hidden" name="_method" value="Delete">
+        <input type="submit" value="delete">
+      </form>
+    </li>
+  <% end %>
+   <p>
+   <a href=items/new> <h3>click to add to the list</h3> </a>
+   </p>
+    

@@ -4,16 +4,11 @@ class ItemsController < ApplicationController
     erb :'/items/index'
   end
 
-  get '/items/new' do
-    @users = User.all
-    erb :'/items/new'
-  end
-
   post '/items' do
     @item = Item.new(params["item"])
-    #binding.pry
     if @item && !params["item"]["name"].empty? && !params["item"]["description"].empty?
-     @item.user_id = current_user.id 
+      #binding.pry
+      @item.user_id = current_user.id 
       @item.save
       redirect to "/items/#{@item.id}"
     else
@@ -21,41 +16,36 @@ class ItemsController < ApplicationController
     end
   end
 
-  get '/items/:id' do
-   @item = Items.find(params[:id])
+  get '/items/new' do
+    @items = Item.all
+    erb :'/items/new'
+  end
 
-      erb :'items/show'
-   end
+  get '/items/:id' do
+   @item = Item.find_by_id(params[:id])
+   erb :'items/show'
+  end
 
   get '/items/:id/edit' do
     @item = Item.find(params[:id])
-  
-      erb :'items/edit'
+    erb :'items/edit'
   end
 
-  get '/items/:id/edit' do
-    @item =Item.find_by_current_user(params[:id])
-    erb :'/items/edit'
+  patch '/items/:id' do  
+    @item =Item.find(params[:id])
+    #binding.pry
+    @item.update(name: params[:name], description: params[:description])
+    @item.save
+    flash[:message] = "Item Successfully Updated!"
+    redirect to "/items"
   end
 
-    patch '/item/:id' do 
-      redirect_if_not_logged_in?
-     @item =Item.find(params[:id])
-     if @item
-      @item.update(name: params[:name], description: params[:description])
-      redirect to "/items/#{@items.id}"
-     @item.save
-       #binding.pry
-     else
-      erb :'/items/edit'
-  end 
-end
-
-    delete '/items/:id/delete' do
+  delete '/items/:id/delete' do
     @item = Item.find_by_id(params[:id])
-   @item 
-      @item=Item.find(params[:id]).destroy
-      flash[:message] = "Item Successfully Deleted!"
+    @item 
+    @item=Item.find_by_id(params[:id]).destroy
+    flash[:message] = "Item Successfully Deleted!"
     redirect to "/items"
   end
 end
+

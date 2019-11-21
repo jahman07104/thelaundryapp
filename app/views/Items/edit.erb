@@ -1,10 +1,17 @@
  <h1>update an Item</h1>
 
- <form method="post" action="/items/<%= @item.id %>">
-  <input id="hidden" type="hidden" name="_method" value="patch">
-  <input type="text" name="name" value="<%= @item.name %>">
-  <input type="text" name="description" value="<%= @item.description %>">
-  <button type="submit">Update</button>
+ <form method="POST" action="/items/<%= @item.id %>">
+    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <p>
+    <label for= "name" style="display: block:">Name:</label>
+     <input type="text" name="name" value="<%= @item.name %>">
+    </p  
+    <p>
+    <label for="item [description]" style="display: block;">Description</label><textarea name="item[description]"></textarea>
+
+    </p>
+    <button type="submit">Update</button>
+    
 </form>
 
 

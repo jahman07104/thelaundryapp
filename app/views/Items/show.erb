@@ -1,8 +1,7 @@
 <h1><%= @item.name %></h1>
-<p><%= @item.description %></p>
+<h2> <%= @item.description %></h2>
 
-
-
+</p>
 <form action="/items/<%= @item.id %>/edit">
   <input type="submit" value="edit">
 </form>
@@ -11,7 +10,7 @@
 <form method="Post" action="/items/<%= @item.id %>/delete">
   <input id="hidden" type="hidden" name="_method" value="Delete">
   <input type="submit" value="delete">
-
+</form>
 <br>
 
 
@@ -19,8 +18,7 @@
 <%= @user.name %> after you are done you can 
 <% end %>
 <a href="/sessions/logout">Log Out</a>
-<form action="/users" method="POST">
 <br>
-</form>
+
 
 
